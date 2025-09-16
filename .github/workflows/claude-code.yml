@@ -1,0 +1,36 @@
+name: Claude Code (OpenRouter)
+
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  claude:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Claude Code Action
+        uses: cosine23/claude-code-action@main
+        with:
+          openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
+          openrouter_site_url: https://github.com/cosine23/test-next-app
+          openrouter_app_title: "My App Claude Review"
+          trigger_phrase: "@claude"
+          label_trigger: "claude"
+          branch_prefix: "claude/"
+          claude_args: |
+            --max-turns 6
+            --model anthropic/claude-sonnet-4
