@@ -26,6 +26,7 @@ jobs:
         uses: cosine23/claude-code-action@main
         with:
           openrouter_api_key: ${{ secrets.OPENROUTER_API_KEY }}
+          github_token: ${{ secrets.CLAUDE_GITHUB_TOKEN }}
           openrouter_site_url: https://github.com/cosine23/test-next-app
           openrouter_app_title: "My App Claude Review"
           trigger_phrase: "@claude"
